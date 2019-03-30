@@ -8,7 +8,7 @@ export default new VueX.Store({
         loading: false
     },
     mutations: {
-        setLoading ({ state }, payload) {
+        setLoading (state, payload) {
             state.loading = payload
         }
     },
@@ -16,7 +16,7 @@ export default new VueX.Store({
 
     },
     getters: {
-        loading ({ state }) {
+        loading (state) {
             return state.loading
         }
     }
