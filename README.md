@@ -1,4 +1,4 @@
-# twitch_downloader
+# VOD's Downloader
 
 ## Project setup
 ```
