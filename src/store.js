@@ -21,10 +21,11 @@ export default new VueX.Store({
         getStreamers ({ commit }, payload) {
             commit('setLoading', true)
             twitchDao.getStreamers(payload).then(response => {
+                commit('setLoading', false)
                 return response.json()
             })
             .then(json => {
-                commit('setStreamers', json)
+                commit('setStreamers', json.channels)
             })
         }
     },
