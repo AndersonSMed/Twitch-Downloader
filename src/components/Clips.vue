@@ -13,7 +13,7 @@
         </v-layout>
     </v-container>
     <v-card-actions>
-        <v-btn @click="$store.dispatch('selectStreamer', null)" outline flat block>Close</v-btn>
+        <v-btn @click="clearData()" outline flat block>Close</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -46,6 +46,12 @@
             if (val !== oldval && val) {
                 this.$store.dispatch('loadClips')
             }
+        }
+    },
+    methods: {
+        clearData () {
+            this.$store.dispatch('selectStreamer', null)
+            this.$store.dispatch('clearClips', null)
         }
     }
   }

@@ -54,6 +54,9 @@ export default new VueX.Store({
         // Selects a streamer and stores it
         selectStreamer ({ commit }, payload) {
             commit('setStreamer', payload)
+        },
+        clearClips ({ commit }) {
+            commit('setClips', null)
         }
     },
     getters: {
