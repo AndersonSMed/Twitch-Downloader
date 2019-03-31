@@ -1,12 +1,26 @@
 <template>
   <v-container grid-list-sm fluid>
     <v-layout
-      justify-space-around
+      justify-space-between
+      align-center
       row wrap
     >
-    <v-flex xs12 sm5 md5>
+    <v-flex xs4 sm3>
+      <v-slider
+        label="Limit"
+        v-model="limit"
+        :disabled="loading"
+        :thumb-size="25"
+        thumb-label="always"
+        max="100"
+        min="1"
+      >
+      </v-slider>
+    </v-flex>
+    <v-spacer v-if="!$vuetify.breakpoint.xs"></v-spacer>
+    <v-flex xs7 lg5>
       <v-text-field
-        label="Your Streamer's name"
+        label="Streamer"
         :loading="loading"
         v-model="streamer"
       >
@@ -17,6 +31,7 @@
         </template>
       </v-text-field>
     </v-flex>
+    <v-spacer v-if="!$vuetify.breakpoint.xs"></v-spacer>
     </v-layout>
     <v-layout
       row wrap
@@ -35,7 +50,8 @@
   export default {
     components: { Streamer },
     data: () => ({
-      streamer: null
+      streamer: null,
+      limit: 25
     }),
     computed: {
       loading () {
@@ -47,7 +63,7 @@
     },
     methods: {
       search () {
-        this.$store.dispatch('getStreamers', this.streamer)
+        this.$store.dispatch('getStreamers', {query: encodeURIComponent(this.streamer), limit: this.limit})
       }
     }
   }

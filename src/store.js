@@ -20,7 +20,7 @@ export default new VueX.Store({
     actions: {
         getStreamers ({ commit }, payload) {
             commit('setLoading', true)
-            twitchDao.getStreamers(payload).then(response => {
+            twitchDao.getStreamers(payload.query, payload.limit).then(response => {
                 commit('setLoading', false)
                 return response.json()
             })

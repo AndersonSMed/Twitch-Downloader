@@ -10,7 +10,6 @@
               <v-flex xs12>
                 <v-img
                     :src="streamer.logo"
-                    :lazy-src="loading"
                     aspect-ratio="1"
                     contain
                 >
