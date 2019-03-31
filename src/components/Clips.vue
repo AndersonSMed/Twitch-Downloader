@@ -1,10 +1,10 @@
 <template>
   <v-card>
-      <v-container fluid>
+      <v-container flex class="pt-0">
         <v-layout row wrap>
             <v-flex xs12 class="text-xs-center">
                 <v-card-text class="headline" v-if="streamer">
-                    Select a Clip from {{streamer.display_name}} to watch
+                    Select a clip to watch
                 </v-card-text>
             </v-flex>
             <v-flex xs12 class="text-xs-center" v-for="(clip, index) in clips" :key="index" d-flex>
