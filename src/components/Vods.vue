@@ -1,11 +1,29 @@
 <template>
-  <v-container>
-      
-  </v-container>
+  <v-card>
+      <v-container fluid>
+        <v-layout row wrap>
+            <v-flex xs12 class="text-xs-center">
+                <v-card-text class="headline" v-if="streamer">
+                    Listing videos for {{streamer.display_name}}
+                </v-card-text>
+            </v-flex>
+            <v-flex xs12 class="text-xs-center" v-for="(vod, index) in videos" :key="index" d-flex>
+                <vod-details :vod="vod"></vod-details>
+            </v-flex>
+        </v-layout>
+    </v-container>
+    <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn @click="$store.dispatch('selectStreamer', null)">Close</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
+  import VodDetails from '@/components/VodDetails'
+
   export default {
+    components: { VodDetails },
     data: () => ({
     }),
     mounted () {
@@ -35,5 +53,4 @@
 </script>
 
 <style>
-
 </style>

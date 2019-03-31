@@ -37,11 +37,11 @@
       row wrap
       justify-center
     >
-      <v-flex xs6 sm3 md3 lg2 v-for="(streamer, index) in streamers" :key="index" d-flex>
-          <streamer :streamer="streamer"></streamer>
+      <v-flex xs6 sm3 md3 lg2 v-for="(live, index) in streamers" :key="index" d-flex>
+          <streamer :streamer="live"></streamer>
       </v-flex>
     </v-layout>
-    <v-dialog v-model="dialogVod" lazy width="500" :fullscreen="$vuetify.breakpoint.xs">
+    <v-dialog v-model="dialogVod" persistent lazy width="600" :fullscreen="$vuetify.breakpoint.xs">
       <vods></vods>
     </v-dialog>
   </v-container>
