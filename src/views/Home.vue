@@ -22,7 +22,7 @@
       <v-text-field
         label="Streamer"
         :loading="loading"
-        v-model="streamer"
+        v-model="streamerQuery"
       >
         <template v-slot:append-outer>
           <v-btn icon @click="search">
@@ -41,17 +41,22 @@
           <streamer :streamer="streamer"></streamer>
       </v-flex>
     </v-layout>
+    <v-dialog v-model="dialogVod" lazy width="500" :fullscreen="$vuetify.breakpoint.xs">
+      <vods></vods>
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
   import Streamer from '@/components/Streamer'
+  import Vods from '@/components/Vods'
 
   export default {
-    components: { Streamer },
+    components: { Streamer, Vods },
     data: () => ({
-      streamer: null,
-      limit: 25
+      streamerQuery: null,
+      limit: 25,
+      dialogVod: false
     }),
     computed: {
       loading () {
@@ -59,11 +64,19 @@
       },
       streamers () {
         return this.$store.getters.streamers
+      },
+      streamer () {
+        return this.$store.getters.streamer
+      }
+    },
+    watch: {
+      streamer (val) {
+        this.dialogVod = !!val
       }
     },
     methods: {
       search () {
-        this.$store.dispatch('getStreamers', {query: encodeURIComponent(this.streamer), limit: this.limit})
+        this.$store.dispatch('getStreamers', {query: encodeURIComponent(this.streamerQuery), limit: this.limit})
       }
     }
   }

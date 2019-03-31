@@ -1,5 +1,5 @@
 <template>
-  <v-card tile class="d-flex" style="background: transparent; cursor: pointer" ripple>
+  <v-card tile class="d-flex" style="background: transparent; cursor: pointer" ripple @click="setStreamer">
       <v-container flex>
           <v-layout row wrap justify-center>
               <v-flex xs12>
@@ -24,7 +24,12 @@
   export default {
     props: ['streamer'],
     data: () => ({
-    })
+    }),
+    methods: {
+      setStreamer () {
+        this.$store.dispatch('selectStreamer', this.streamer)
+      }
+    }
   }
 </script>
 
