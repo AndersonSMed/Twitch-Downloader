@@ -4,17 +4,27 @@
         <v-layout row wrap justify-start>
             <v-flex xs6>
                 <v-card-text class="text-xs-center">
-                    {{vod.title}}
+                    {{clip.title}}
                 </v-card-text>
                 <v-img
-                    :src="vod.preview.large"
-                    :lazy-src="vod.preview.small"
+                    :src="clip.thumbnails.medium"
+                    :lazy-src="clip.thumbnails.tiny"
                     aspect-ratio="1.9"
                     contain
                 >
+                 <template v-slot:placeholder>
+                  <v-layout
+                    fill-height
+                    align-center
+                    justify-center
+                    ma-0
+                  >
+                    <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                  </v-layout>
+                </template>
                 </v-img>
                 <v-card-text class="text-xs-center">
-                    Game: {{vod.game}}
+                    Game: {{clip.game}}
                 </v-card-text>
             </v-flex>
             <v-flex xs6>
@@ -29,7 +39,7 @@
 
 <script>
   export default {
-    props: ['vod'],
+    props: ['clip'],
     data: () => ({
     })
   }

@@ -9,9 +9,9 @@ let getStreamers = (query, limit) => {
     })
 }
 
-// Get videos from a specified streamer ID
-let getVideos = (id) => {
-    return fetch(`https://api.twitch.tv/kraken/channels/${id}/videos`, {
+// Get clips from a specified channel name
+let getClips = (channel) => {
+    return fetch(`https://api.twitch.tv/kraken/clips/top?channel=${channel}`, {
         method: 'GET',
         headers: headers,
         cache: 'default'
@@ -20,5 +20,5 @@ let getVideos = (id) => {
 
 export default {
     getStreamers,
-    getVideos
+    getClips
 }

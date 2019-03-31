@@ -1,4 +1,4 @@
-# VOD's Downloader
+# Twitch Clips Downloader
 
 ## Project setup
 ```

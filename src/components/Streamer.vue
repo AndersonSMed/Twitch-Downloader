@@ -13,6 +13,16 @@
                     aspect-ratio="1"
                     contain
                 >
+                <template v-slot:placeholder>
+                  <v-layout
+                    fill-height
+                    align-center
+                    justify-center
+                    ma-0
+                  >
+                    <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                  </v-layout>
+                </template>
                 </v-img>
               </v-flex>
           </v-layout>

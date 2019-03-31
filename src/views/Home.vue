@@ -41,22 +41,22 @@
           <streamer :streamer="live"></streamer>
       </v-flex>
     </v-layout>
-    <v-dialog v-model="dialogVod" persistent lazy width="600" :fullscreen="$vuetify.breakpoint.xs">
-      <vods></vods>
+    <v-dialog v-model="dialogClip" persistent lazy width="600" :fullscreen="$vuetify.breakpoint.xs">
+      <clips></clips>
     </v-dialog>
   </v-container>
 </template>
 
 <script>
   import Streamer from '@/components/Streamer'
-  import Vods from '@/components/Vods'
+  import Clips from '@/components/Clips'
 
   export default {
-    components: { Streamer, Vods },
+    components: { Streamer, Clips },
     data: () => ({
       streamerQuery: null,
       limit: 25,
-      dialogVod: false
+      dialogClip: false
     }),
     computed: {
       loading () {
@@ -71,7 +71,7 @@
     },
     watch: {
       streamer (val) {
-        this.dialogVod = !!val
+        this.dialogClip = !!val
       }
     },
     methods: {
