@@ -1,5 +1,5 @@
 <template>
-  <v-card flat tile class="d-flex" style="background: transparent">
+  <v-card tile class="d-flex" style="background: transparent; cursor: pointer" ripple>
       <v-container flex>
           <v-layout row wrap justify-center>
               <v-flex xs12>
