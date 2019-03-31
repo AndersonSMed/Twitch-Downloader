@@ -13,8 +13,7 @@
         </v-layout>
     </v-container>
     <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn @click="$store.dispatch('selectStreamer', null)">Close</v-btn>
+        <v-btn @click="$store.dispatch('selectStreamer', null)" outline flat block>Close</v-btn>
     </v-card-actions>
   </v-card>
 </template>

@@ -46,7 +46,19 @@
     props: ['clip'],
     data: () => ({
       clicked: false
-    })
+    }),
+    computed: {
+      streamer () {
+        return this.$store.getters.streamer
+      }
+    },
+    watch: {
+      streamer (val) {
+        if (!val) {
+          this.clicked = false
+        }
+      }
+    }
   }
 </script>
 
