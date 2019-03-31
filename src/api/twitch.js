@@ -18,7 +18,15 @@ let getClips = (channel) => {
     })
 }
 
+let loadClipData = (slug) => {
+    return fetch(`https://clips.twitch.tv/api/v2/clips/${slug}/status`, {
+      method: 'GET',
+      cache: 'default'
+    })
+  }
+
 export default {
     getStreamers,
-    getClips
+    getClips,
+    loadClipData
 }

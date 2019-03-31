@@ -33,7 +33,12 @@
                 <iframe :src="clip.embed_url" frameborder="0" width="100%" height="250"></iframe>
               </template>
               <v-card-text class="text-xs-center pa-1">
-                  DOWNLOAD
+                  DOWNLOAD:
+                <template v-if="data">
+                  <a :href="quality.source" v-for="(quality, index) in data.quality_options" :key="index">
+                    {{quality.quality}}p
+                  </a>
+                </template>
               </v-card-text>
             </v-flex>
         </v-layout>
@@ -42,10 +47,13 @@
 </template>
 
 <script>
+  import twitchDao from '@/api/twitch'
+
   export default {
     props: ['clip'],
     data: () => ({
-      clicked: false
+      clicked: false,
+      data: null
     }),
     computed: {
       streamer () {
@@ -57,6 +65,19 @@
         if (!val) {
           this.clicked = false
         }
+      }
+    },
+    mounted () {
+      this.loadData()
+    },
+    methods: {
+      loadData () {
+        twitchDao.loadClipData(this.clip.slug).then(response => {
+          return response.json()
+        })
+        .then(json => {
+          this.data = json
+        })
       }
     }
   }
