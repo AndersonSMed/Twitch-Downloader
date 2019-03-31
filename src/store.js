@@ -50,6 +50,10 @@ export default new VueX.Store({
             .then(json => {
                 commit('setVideos', json.videos)
             })
+        },
+        // Selects a streamer and stores it
+        selectStreamer ({ commit }, payload) {
+            commit('setStreamer', payload)
         }
     },
     getters: {
@@ -58,6 +62,12 @@ export default new VueX.Store({
         },
         streamers (state) {
             return state.streamers
+        },
+        streamer (state) {
+            return state.streamer
+        },
+        videos (state) {
+            return state.videos
         }
     }
 })
