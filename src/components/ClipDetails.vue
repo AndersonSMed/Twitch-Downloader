@@ -38,7 +38,6 @@
               >
                 <template v-slot:activator="{ on }">
                   <v-btn
-                    outline
                     flat
                     v-on="on"
                   >

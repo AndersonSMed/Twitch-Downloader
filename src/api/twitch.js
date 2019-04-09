@@ -10,8 +10,8 @@ let getStreamers = (query, limit) => {
 }
 
 // Get clips from a specified channel name
-let getClips = (channel) => {
-    return fetch(`https://api.twitch.tv/kraken/clips/top?channel=${channel}`, {
+let getClips = (channel, limit, cursor) => {
+    return fetch(`https://api.twitch.tv/kraken/clips/top?channel=${channel}&limit=${limit}${!!cursor? '&cursor=' + cursor : ''}`, {
         method: 'GET',
         headers: headers,
         cache: 'default'

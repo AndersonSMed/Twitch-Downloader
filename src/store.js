@@ -12,7 +12,9 @@ export default new VueX.Store({
         // Stores all the videos of a specified streamer
         clips: [],
         // Stores the selected streamer
-        streamer: null
+        streamer: null,
+        // Stores a cursor to the next page
+        cursor: null
     },
     mutations: {
         setLoading (state, payload) {
@@ -26,6 +28,9 @@ export default new VueX.Store({
         },
         setStreamer (state, payload) {
             state.streamer = payload
+        },
+        setCursor (state, payload) {
+            state.cursor = payload
         }
     },
     actions: {
@@ -41,14 +46,15 @@ export default new VueX.Store({
             })
         },
         // Load videos from a specified streamer
-        loadClips ({ commit, state }) {
+        loadClips ({ commit, state }, payload) {
             commit('setLoading', true)
-            twitchDao.getClips(state.streamer.display_name).then(response => {
+            twitchDao.getClips(state.streamer.display_name, payload.limit, payload.cursor).then(response => {
                 commit('setLoading', false)
                 return response.json()
             })
             .then(json => {
                 commit('setClips', json.clips)
+                commit('setCursor', json._cursor)
             })
         },
         // Selects a streamer and stores it
@@ -71,6 +77,9 @@ export default new VueX.Store({
         },
         clips (state) {
             return state.clips
+        },
+        cursor (state) {
+            return state.cursor
         }
     }
 })

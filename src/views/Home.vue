@@ -41,7 +41,7 @@
           <streamer :streamer="live"></streamer>
       </v-flex>
     </v-layout>
-    <v-dialog v-model="dialogClip" persistent lazy width="600" height="100%" :fullscreen="$vuetify.breakpoint.xs">
+    <v-dialog v-model="dialogClip" persistent lazy width="600" :fullscreen="$vuetify.breakpoint.xs">
       <clips></clips>
     </v-dialog>
   </v-container>
