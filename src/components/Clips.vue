@@ -26,6 +26,7 @@
             </v-flex>
         </v-layout>
     </v-container>
+    <v-divider></v-divider>
     <v-card-actions>
         <v-btn @click="clearData()" flat>Close</v-btn>
         <v-spacer></v-spacer>
