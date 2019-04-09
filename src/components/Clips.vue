@@ -15,7 +15,7 @@
                     :thumb-size="25"
                     thumb-label="always"
                     append-icon="refresh"
-                    @click:append="loadClips()"
+                    @click:append="reloadClips()"
                     max="10"
                     min="1"
                 >
@@ -72,11 +72,14 @@
     },
     methods: {
         clearData () {
-            this.$store.dispatch('selectStreamer', null)
             this.$store.dispatch('clearClips', null)
+            this.$store.dispatch('selectStreamer', null)
         },
         loadClips () {
             this.$store.dispatch('loadClips', { limit: this.limit, cursor: null })
+        },
+        reloadClips () {
+            this.$store.dispatch('reloadClips', this.limit)
         },
         nextPage () {
             this.$store.dispatch('loadClips', { limit: this.limit, cursor: this.cursor })

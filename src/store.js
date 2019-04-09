@@ -14,7 +14,9 @@ export default new VueX.Store({
         // Stores the selected streamer
         streamer: null,
         // Stores a cursor to the next page
-        cursor: null
+        cursor: null,
+        // Sets last cursor to reload results of a certain page
+        lastCursor: null
     },
     mutations: {
         setLoading (state, payload) {
@@ -31,6 +33,9 @@ export default new VueX.Store({
         },
         setCursor (state, payload) {
             state.cursor = payload
+        },
+        setLastCursor (state, payload) {
+            state.lastCursor = payload
         }
     },
     actions: {
@@ -54,6 +59,18 @@ export default new VueX.Store({
             })
             .then(json => {
                 commit('setClips', json.clips)
+                commit('setLastCursor', state.cursor)
+                commit('setCursor', json._cursor)
+            })
+        },
+        reloadClips ({ commit, state }, payload) {
+            commit('setLoading', true)
+            twitchDao.getClips(state.streamer.display_name, payload, state.lastCursor).then(response => {
+                commit('setLoading', false)
+                return response.json()
+            })
+            .then(json => {
+                commit('setClips', json.clips)
                 commit('setCursor', json._cursor)
             })
         },
@@ -63,6 +80,8 @@ export default new VueX.Store({
         },
         clearClips ({ commit }) {
             commit('setClips', null)
+            commit('setCursor', null)
+            commit('setLastCursor', null)
         }
     },
     getters: {
@@ -80,6 +99,9 @@ export default new VueX.Store({
         },
         cursor (state) {
             return state.cursor
+        },
+        lastCursor (state) {
+            return state.lastCursor
         }
     }
 })
