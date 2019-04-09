@@ -32,14 +32,27 @@
               <template v-else>
                 <iframe :src="clip.embed_url" frameborder="0" width="100%" height="250"></iframe>
               </template>
-              <v-card-text class="text-xs-center pa-1">
-                  DOWNLOAD:
-                <template v-if="data">
-                  <a :href="quality.source" v-for="(quality, index) in data.quality_options" :key="index">
-                    {{quality.quality}}p
-                  </a>
+              <v-menu
+                transition="slide-y-transition"
+                bottom
+              >
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    outline
+                    flat
+                    v-on="on"
+                  >
+                    Download
+                  </v-btn>
                 </template>
-              </v-card-text>
+                <v-list>
+                  <template v-if="data">
+                    <v-list-tile ripple @click="open(quality.source)" v-for="(quality, index) in data.quality_options" :key="index">
+                      {{quality.quality}}p
+                    </v-list-tile>
+                  </template>
+                </v-list>
+              </v-menu>
             </v-flex>
         </v-layout>
     </v-container>
@@ -71,6 +84,9 @@
       this.loadData()
     },
     methods: {
+      open (url) {
+        window.open(url, '_self')
+      },
       loadData () {
         twitchDao.loadClipData(this.clip.slug).then(response => {
           return response.json()
