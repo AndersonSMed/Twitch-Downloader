@@ -9,7 +9,8 @@ export default new Router({
     base: '/',
     routes: [
         {
-            path: '',
+            path: '/',
+            name: 'home',
             component: Home
         }
     ]
