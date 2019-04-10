@@ -22,7 +22,9 @@
       <v-text-field
         label="Streamer"
         :loading="loading"
+        :disabled="loading"
         v-model="streamerQuery"
+        @keydown.enter="search()"
       >
         <template v-slot:append-outer>
           <v-btn icon @click="search">
@@ -41,7 +43,7 @@
           <streamer :streamer="live"></streamer>
       </v-flex>
     </v-layout>
-    <v-dialog v-model="dialogClip" persistent lazy width="600" :fullscreen="$vuetify.breakpoint.xs">
+    <v-dialog v-model="dialogClip" lazy width="600" :fullscreen="$vuetify.breakpoint.xs">
       <clips></clips>
     </v-dialog>
   </v-container>
@@ -72,6 +74,12 @@
     watch: {
       streamer (val) {
         this.dialogClip = !!val
+      },
+      dialogClip (val) {
+        if (!val) {
+          this.$store.dispatch('clearClips', null)
+          this.$store.dispatch('selectStreamer', null)
+        }
       }
     },
     methods: {
