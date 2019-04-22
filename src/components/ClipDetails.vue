@@ -9,26 +9,39 @@
               <v-card-text class="text-xs-center pt-0 pb-1">
                   Game: {{clip.game}}
               </v-card-text>
-              <v-img
-                  :src="clip.thumbnails.medium"
-                  :lazy-src="clip.thumbnails.tiny"
-                  v-if="!clicked"
-                  aspect-ratio="1.9"
-                  contain
-                  @click="clicked = true"
-                  style="cursor: pointer"
-              >
-                <template v-slot:placeholder>
-                  <v-layout
-                    fill-height
-                    align-center
-                    justify-center
-                    ma-0
+              <v-tooltip v-if="!clicked" bottom>
+                <template v-slot:activator="{ on }">
+                  <v-img
+                    :src="clip.thumbnails.medium"
+                    :lazy-src="clip.thumbnails.tiny"
+                    v-on="on"
+                    aspect-ratio="1.9"
+                    contain
+                    @click="clicked = true"
+                    style="cursor: pointer"
                   >
-                    <v-progress-circular indeterminate color="grey"></v-progress-circular>
-                  </v-layout>
+                    <template v-slot:placeholder>
+                      <v-layout
+                        fill-height
+                        align-center
+                        justify-center
+                        ma-0
+                      >
+                        <v-progress-circular indeterminate color="grey"></v-progress-circular>
+                      </v-layout>
+                    </template>
+                    <v-layout align-center justify-center fill-height class="lightbox white--text">
+                      <v-flex>
+                        <v-icon
+                          size="120"
+                          color="grey lighten-2"
+                        >play_arrow</v-icon>
+                      </v-flex>
+                    </v-layout>
+                  </v-img>
                 </template>
-              </v-img>
+                <span>Click to play clip</span>
+              </v-tooltip>
               <template v-else>
                 <iframe :src="clip.embed_url" frameborder="0" width="100%" height="250"></iframe>
               </template>
