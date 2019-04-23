@@ -21,17 +21,21 @@
                 >
                 </v-slider>
             </v-flex>
-            <v-flex xs10 v-if="loading">
+            <template v-if="!!clips">
+                <template v-if="clips.length">
+                    <v-flex xs12 class="text-xs-center" v-for="(clip, index) in clips" :key="index" d-flex>
+                        <clip-details :clip="clip"></clip-details>
+                    </v-flex>
+                </template>
+                <v-flex v-else class="text-xs-center">
+                    <span class="headline grey--text text--darken-2">Sorry, but there's no clips to show :T</span>
+                </v-flex>
+            </template>
+            <v-flex xs10 v-else-if="loading">
                 <v-progress-linear 
                     :indeterminate="true"
                     height="2"
                 ></v-progress-linear>
-            </v-flex>
-            <v-flex xs12 class="text-xs-center" v-for="(clip, index) in clips" :key="index" d-flex v-else-if="clips.length">
-                <clip-details :clip="clip"></clip-details>
-            </v-flex>
-            <v-flex v-else class="text-xs-center">
-                <span class="headline grey--text text--darken-2">Sorry, but there's no clips to show :T</span>
             </v-flex>
         </v-layout>
     </v-container>
