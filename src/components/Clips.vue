@@ -27,8 +27,11 @@
                     height="2"
                 ></v-progress-linear>
             </v-flex>
-            <v-flex xs12 class="text-xs-center" v-for="(clip, index) in clips" :key="index" d-flex v-else>
+            <v-flex xs12 class="text-xs-center" v-for="(clip, index) in clips" :key="index" d-flex v-else-if="clips.length">
                 <clip-details :clip="clip"></clip-details>
+            </v-flex>
+            <v-flex v-else class="text-xs-center">
+                <span class="headline grey--text text--darken-2">Sorry, but this accout doesn't have any more clips to watch :T</span>
             </v-flex>
         </v-layout>
     </v-container>
