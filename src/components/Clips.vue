@@ -31,7 +31,7 @@
                 <clip-details :clip="clip"></clip-details>
             </v-flex>
             <v-flex v-else class="text-xs-center">
-                <span class="headline grey--text text--darken-2">Sorry, but this accout doesn't have any more clips to watch :T</span>
+                <span class="headline grey--text text--darken-2">Sorry, but there's no clips to show :T</span>
             </v-flex>
         </v-layout>
     </v-container>
