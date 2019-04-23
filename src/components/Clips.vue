@@ -21,7 +21,13 @@
                 >
                 </v-slider>
             </v-flex>
-            <v-flex xs12 class="text-xs-center" v-for="(clip, index) in clips" :key="index" d-flex>
+            <v-flex xs10 v-if="loading">
+                <v-progress-linear 
+                    :indeterminate="true"
+                    height="2"
+                ></v-progress-linear>
+            </v-flex>
+            <v-flex xs12 class="text-xs-center" v-for="(clip, index) in clips" :key="index" d-flex v-else>
                 <clip-details :clip="clip"></clip-details>
             </v-flex>
         </v-layout>

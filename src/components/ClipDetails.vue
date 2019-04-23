@@ -9,7 +9,7 @@
               <v-card-text class="text-xs-center pt-0 pb-1">
                   Game: {{clip.game}}
               </v-card-text>
-              <v-tooltip v-if="!clicked" bottom>
+              <v-tooltip v-if="!clicked" bottom lazy>
                 <template v-slot:activator="{ on }">
                   <v-img
                     :src="clip.thumbnails.medium"
